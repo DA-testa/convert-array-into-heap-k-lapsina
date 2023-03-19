@@ -29,10 +29,10 @@ def next_swap(i, data, change_list):
 def main():
   inp = input()
 
-  if inp == "I":
+  if inp == "i":
     n = int(input().strip())
     data = list(map(int, input().strip().split()))
-  elif inp == "F":
+  elif inp == "f":
     inp2 = input()
     try:
       with open("./tests/" + inp2, mode='r') as fails:
