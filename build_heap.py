@@ -27,16 +27,12 @@ def next_swap(i, data, change_list):
 
 
 def main():
-  print("What do you wanna do? (I/F): ")
   inp = input()
 
   if inp == "I":
-    print("Enter lenght of data: ")
     n = int(input())
-    print("Enter data: ")
     data = list(map(int, input().split()))
   elif inp == "F":
-    print("Enter file name: ")
     inp2 = input()
     try:
       with open("./tests/" + inp2, mode='r') as fails:
@@ -44,7 +40,6 @@ def main():
         nums = fails.readline().split()
         data = list(map(int, nums))
     except:
-      print("File not found")
       return
   else:
     print("Something went wrong")
