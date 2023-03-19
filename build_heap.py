@@ -30,8 +30,8 @@ def main():
   inp = input()
 
   if inp == "I":
-    n = int(input())
-    data = list(map(int, input().split()))
+    n = int(input().strip())
+    data = list(map(int, input().strip().split()))
   elif inp == "F":
     inp2 = input()
     try:
