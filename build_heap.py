@@ -2,41 +2,61 @@
 
 
 def build_heap(data):
-    swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
+  swaps = []
+  # TODO: Creat heap and heap sort
+  # try to achieve  O(n) and not O(n2)
+  for i in range(len(data) // 2, -1, -1):
+    next_swap(i, data, swaps)
+
+  return swaps
 
 
-    return swaps
+def next_swap(i, data, change_list):
+  smallest_index = i
+  l_index = 2 * i + 1
+  r_index = 2 * i + 2
+  if l_index < len(data) and data[l_index] < data[smallest_index]:
+    smallest_index = l_index
+  if r_index < len(data) and data[r_index] < data[smallest_index]:
+    smallest_index = r_index
+
+  if i != smallest_index:
+    data[i], data[smallest_index] = data[smallest_index], data[i]
+    change_list.append((i, smallest_index))
+    next_swap(smallest_index, data, change_list)
 
 
 def main():
-    
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
+  print("What do you wanna do? (I/F): ")
+  inp = input()
 
-
-    # input from keyboard
+  if inp == "I":
+    print("Enter lenght of data: ")
     n = int(input())
+    print("Enter data: ")
     data = list(map(int, input().split()))
+  elif inp == "F":
+    print("Enter file name: ")
+    inp2 = input()
+    try:
+      with open("./tests/" + inp2, mode='r') as fails:
+        n = int(fails.readline())
+        nums = fails.readline().split()
+        data = list(map(int, nums))
+    except:
+      print("File not found")
+      return
+  else:
+    print("Something went wrong")
+    return
 
-    # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
+  assert len(data) == n
 
-    # calls function to assess the data 
-    # and give back all swaps
-    swaps = build_heap(data)
-
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
-
-
-    # output all swaps
-    print(len(swaps))
-    for i, j in swaps:
-        print(i, j)
+  change_list = build_heap(data)
+  print(len(change_list))
+  for (i, j) in change_list:
+    print(i, j)
 
 
 if __name__ == "__main__":
-    main()
+  main()
